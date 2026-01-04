@@ -16,16 +16,16 @@ export function Navbar() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 border-b border-border bg-navy-dark/95 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary shadow-gold">
               <MapPin className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-foreground">
-              Campus<span className="text-primary">Find</span>
+            <span className="text-xl font-bold text-white">
+              BVM<span className="text-gold">Find</span>
             </span>
           </Link>
 
@@ -34,11 +34,11 @@ export function Navbar() {
             {navLinks.map((link) => (
               <Link key={link.href} to={link.href}>
                 <Button
-                  variant={isActive(link.href) ? "secondary" : "ghost"}
-                  className={`text-sm font-medium ${
+                  variant="ghost"
+                  className={`text-sm font-medium font-body ${
                     isActive(link.href)
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-gold/10 text-gold"
+                      : "text-gray-300 hover:text-gold hover:bg-gold/5"
                   }`}
                 >
                   {link.label}
@@ -50,7 +50,7 @@ export function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex">
             <Link to="/report">
-              <Button className="gradient-primary shadow-button text-primary-foreground hover:opacity-90 transition-opacity">
+              <Button className="gradient-primary shadow-button text-primary-foreground hover:opacity-90 transition-opacity font-body font-semibold">
                 <Search className="mr-2 h-4 w-4" />
                 Report Item
               </Button>
@@ -64,16 +64,16 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-foreground" />
+              <X className="h-6 w-6 text-white" />
             ) : (
-              <Menu className="h-6 w-6 text-foreground" />
+              <Menu className="h-6 w-6 text-white" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="border-t border-border py-4 md:hidden">
+          <div className="border-t border-gold/20 py-4 md:hidden">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
@@ -82,11 +82,11 @@ export function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Button
-                    variant={isActive(link.href) ? "secondary" : "ghost"}
-                    className={`w-full justify-start ${
+                    variant="ghost"
+                    className={`w-full justify-start font-body ${
                       isActive(link.href)
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground"
+                        ? "bg-gold/10 text-gold"
+                        : "text-gray-300 hover:text-gold"
                     }`}
                   >
                     {link.label}
@@ -94,7 +94,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link to="/report" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full gradient-primary shadow-button text-primary-foreground">
+                <Button className="w-full gradient-primary shadow-button text-primary-foreground font-body font-semibold">
                   <Search className="mr-2 h-4 w-4" />
                   Report Item
                 </Button>

@@ -15,13 +15,23 @@ const Dashboard = () => {
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<ItemCategory | "all">("all");
-  const [selectedStatus, setSelectedStatus] = useState<ItemStatus | "all">("all");
+  const [selectedStatus, setSelectedStatus] = useState<ItemStatus | "all" | "resolved">("all");
   const [showResolved, setShowResolved] = useState(false);
 
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
-      // Filter by resolved status
-      if (!showResolved && item.isResolved) return false;
+      // Special handling for "resolved" status filter
+      if (selectedStatus === "resolved") {
+        if (!item.isResolved) return false;
+      } else {
+        // For other statuses, hide resolved unless showResolved is checked
+        if (!showResolved && item.isResolved) return false;
+        
+        // Filter by status (lost/found)
+        if (selectedStatus !== "all" && item.status !== selectedStatus) {
+          return false;
+        }
+      }
 
       // Filter by search query
       if (searchQuery) {
@@ -37,11 +47,6 @@ const Dashboard = () => {
 
       // Filter by category
       if (selectedCategory !== "all" && item.category !== selectedCategory) {
-        return false;
-      }
-
-      // Filter by status
-      if (selectedStatus !== "all" && item.status !== selectedStatus) {
         return false;
       }
 
@@ -106,12 +111,20 @@ const Dashboard = () => {
                 {/* Status Filter */}
                 <select
                   value={selectedStatus}
-                  onChange={(e) => setSelectedStatus(e.target.value as ItemStatus | "all")}
+                  onChange={(e) => {
+                    const value = e.target.value as ItemStatus | "all" | "resolved";
+                    setSelectedStatus(value);
+                    // Auto-enable showResolved when "resolved" is selected
+                    if (value === "resolved") {
+                      setShowResolved(true);
+                    }
+                  }}
                   className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   <option value="all">All Status</option>
                   <option value="lost">Lost</option>
                   <option value="found">Found</option>
+                  <option value="resolved">Resolved</option>
                 </select>
               </div>
             </div>
