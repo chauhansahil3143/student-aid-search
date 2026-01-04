@@ -39,7 +39,7 @@ export function HeroSection() {
             <Link to="/report?type=lost">
               <Button
                 size="lg"
-                className="min-w-[200px] border-2 border-primary bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground font-bold uppercase tracking-wide shadow-button brutalist-hover font-body"
+                className="min-w-[200px] border-2 border-primary bg-accent text-accent-primary hover:bg-accent/90 hover:text-accent-primary font-bold uppercase tracking-wide shadow-button brutalist-hover font-body"
               >
                 <Search className="mr-2 h-5 w-5" />
                 Report Lost Item
