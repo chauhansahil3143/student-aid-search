@@ -229,7 +229,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-shift 3s ease-in-out infinite;
+    animation: gradient-shift 6s ease-in-out infinite;
   }
 
   /* Brutalist animated text */
@@ -247,7 +247,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-flow 4s linear infinite;
+    animation: gradient-flow 8s linear infinite;
   }
 
   @keyframes gradient-shift {
